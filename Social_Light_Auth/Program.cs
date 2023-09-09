@@ -6,6 +6,7 @@ using Social_Light_Auth.Models;
 using Social_Light_Auth.Models.DTO.JWToptions;
 using Social_Light_Auth.Service;
 using Social_Light_Auth.Service.IService;
+using Social_light_Message_Bus.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 // dependacy injections
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJWtTokenGenerator, JwtService>();
+builder.Services.AddScoped<IMessageBus, SocialMessageBus>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

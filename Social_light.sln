@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_Auth", "Social_Light_Auth\Social_Light_Auth.csproj", "{B9567043-DF58-4285-979B-8D4D0FB93396}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_COMMENT", "Social_Light_COMMENT\Social_Light_COMMENT.csproj", "{D8BB9CED-DCB0-415A-AC0F-A7A1942FD406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_EMAIL", "Social_Light_EMAIL\Social_Light_EMAIL.csproj", "{2BF12E47-5E76-46EC-BB7B-882F472CFF38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_light_Message_Bus", "Social_light_Message_Bus\Social_light_Message_Bus.csproj", "{A9FB74B3-A379-443D-847D-BCD5A742E5C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_POST", "Social_Light_POST\Social_Light_POST.csproj", "{D2EBF58F-8BB3-4349-AEC2-F2DCD0D49F50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC5A6459-B4B7-484E-8917-3C1EDD3E434D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5A6459-B4B7-484E-8917-3C1EDD3E434D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5A6459-B4B7-484E-8917-3C1EDD3E434D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5A6459-B4B7-484E-8917-3C1EDD3E434D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9567043-DF58-4285-979B-8D4D0FB93396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9567043-DF58-4285-979B-8D4D0FB93396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9567043-DF58-4285-979B-8D4D0FB93396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9567043-DF58-4285-979B-8D4D0FB93396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BB9CED-DCB0-415A-AC0F-A7A1942FD406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BB9CED-DCB0-415A-AC0F-A7A1942FD406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BB9CED-DCB0-415A-AC0F-A7A1942FD406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BB9CED-DCB0-415A-AC0F-A7A1942FD406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF12E47-5E76-46EC-BB7B-882F472CFF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF12E47-5E76-46EC-BB7B-882F472CFF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF12E47-5E76-46EC-BB7B-882F472CFF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF12E47-5E76-46EC-BB7B-882F472CFF38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9FB74B3-A379-443D-847D-BCD5A742E5C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9FB74B3-A379-443D-847D-BCD5A742E5C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9FB74B3-A379-443D-847D-BCD5A742E5C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9FB74B3-A379-443D-847D-BCD5A742E5C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2EBF58F-8BB3-4349-AEC2-F2DCD0D49F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2EBF58F-8BB3-4349-AEC2-F2DCD0D49F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2EBF58F-8BB3-4349-AEC2-F2DCD0D49F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2EBF58F-8BB3-4349-AEC2-F2DCD0D49F50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
