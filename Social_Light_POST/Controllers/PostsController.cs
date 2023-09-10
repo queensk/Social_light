@@ -30,6 +30,7 @@ namespace Social_Light_POST.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> GetAllPosts()
         {
             try
@@ -80,6 +81,7 @@ namespace Social_Light_POST.Controllers
         }
 
         [HttpGet("GetById({Id})")]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> GetPostById(Guid Id)
         {
             try
@@ -155,6 +157,7 @@ namespace Social_Light_POST.Controllers
             }
         }
         [HttpGet("GetPostAndComments/{Id}")]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> GetUserPostsAndComments(string userId)
         {
             try{

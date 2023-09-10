@@ -45,17 +45,14 @@ namespace Social_Light_POST.Services
                 return ex.Message;
             }
         }
-
         public async Task<Post> GetPostByIdAsync(Guid id)
         {
             return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
         }
-
         public async Task<IEnumerable<Post>> GetPostsAsync()
         {
             return await _context.Posts.ToListAsync();
         }
-
         public async Task<string> UpdatePostAsync(Post post)
         {
             try

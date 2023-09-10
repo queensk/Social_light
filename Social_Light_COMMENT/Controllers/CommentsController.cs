@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Social_Light_COMMENT.Data;
@@ -31,6 +32,7 @@ namespace Social_Light_COMMENT.Controllers
 
         // crude
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> CreateComments(CommentDto commentDto)
         {
             try
@@ -58,6 +60,7 @@ namespace Social_Light_COMMENT.Controllers
         }
 
         [HttpGet("{userId}")]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> GetComments(string userId)
         {
             try
@@ -85,6 +88,7 @@ namespace Social_Light_COMMENT.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> UpdateComments(CommentDto commentDto)
         {
             try
@@ -112,6 +116,7 @@ namespace Social_Light_COMMENT.Controllers
         }
 
         [HttpDelete("{userId}")]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> DeleteComments(UserCommentsDTO userCommentsDTO)
         {
             try
@@ -149,6 +154,7 @@ namespace Social_Light_COMMENT.Controllers
         }
 
         [HttpGet("posts/comments")]
+        [Authorize]
         public async Task<ActionResult<ResponseDto>> GetPostComments(string postId)
         {
             try
