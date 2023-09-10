@@ -158,16 +158,7 @@ namespace Social_Light_POST.Controllers
         public async Task<ActionResult<ResponseDto>> GetUserPostsAndComments(string userId)
         {
             try{
-                var userPostsAndComments = await _context.Posts
-                .Include(p => p.Comments)
-                .Where(p => p.UserId == userId)
-                .ToListAsync();
-
-                var userPostsAndCommentsDtoList = userPostsAndComments.Select(post => new UserPostsAndCommentsDto
-                {
-                    Post = post,
-                    Comments = post.Comments.ToList()
-                }).ToList();
+                var userPostsAndCommentsDtoList = await _postInterface.GetUserPostsAndCommentsAsync(userId);
                 _responseDto.Result = userPostsAndCommentsDtoList;
                 _responseDto.IsSuccess = true;
                 return Ok(_responseDto);

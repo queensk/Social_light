@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Social_Light_POST.Data;
 using Social_Light_POST.Models;
+using Social_Light_POST.Models.DTO;
 using Social_Light_POST.Services.IService;
 
 namespace Social_Light_POST.Services
@@ -12,6 +13,7 @@ namespace Social_Light_POST.Services
     public class PostService : IPostService
     {
         private readonly AppDbContext _context;
+        private readonly CommentsService _commentsService;
 
         public PostService(AppDbContext context)
         {
@@ -66,6 +68,24 @@ namespace Social_Light_POST.Services
             {
                 return ex.Message;
             }
+        }
+        public async Task<IEnumerable<UserPostsAndCommentsDto>> GetUserPostsAndCommentsAsync(string userId)
+        {
+            var userPosts = await _context.Posts.Where(p => p.UserId == userId).ToListAsync();
+            var userPostsAndComments = new List<UserPostsAndCommentsDto>();
+
+            foreach (var post in userPosts)
+            {
+                var postComments = await _commentsService.GetAllCommentsData(post.Id.ToString());
+
+                userPostsAndComments.Add(new UserPostsAndCommentsDto
+                {
+                    Post = post,
+                    Comments = postComments
+                });
+            }
+
+            return userPostsAndComments;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Social_Light_POST.Services
             _clientFactory = clientFactory;
 
         }
-        public async Task<CommentDto> GetPostCommentsData(string postId)
+        public async Task<IEnumerable<CommentDto>> GetAllCommentsData(string postId)
         {
             var client = _clientFactory.CreateClient("Comments");
             var response = await client.GetAsync($"/api/Comments/posts/comments/{postId}");
@@ -26,9 +26,9 @@ namespace Social_Light_POST.Services
 
             if (responseDto.IsSuccess)
             {
-                return JsonConvert.DeserializeObject<CommentDto>(Convert.ToString(responseDto.Result));
+                return JsonConvert.DeserializeObject<IEnumerable<CommentDto>>(Convert.ToString(responseDto.Result));
             }
-            return new CommentDto();
+            return new List<CommentDto>();
         }
     }
 }

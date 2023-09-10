@@ -8,6 +8,6 @@ namespace Social_Light_POST.Services.IService
 {
     public interface ICommentService
     {
-         Task<CommentDto> GetPostCommentsData(string CouponCode);
+        Task<IEnumerable<CommentDto>> GetAllCommentsData(string postId);
     }
 }
