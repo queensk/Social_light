@@ -12,7 +12,7 @@ To install and run Social Light locally, you need to have Node.js and MongoDB in
 
 - Clone this repository: `git clone https://github.com/queensk/Social_light.git`
 <!-- show available services -->
-- stat the separate microservices
+- start the separate microservices
 
 ## Usage
 
