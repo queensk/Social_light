@@ -24,5 +24,6 @@ COPY --from=build-env /app/out .
 # Expose port 80 for the app
 EXPOSE 80
 
+
 # Run the app when the container starts
 ENTRYPOINT ["dotnet", "Social_Light_Auth.dll"]

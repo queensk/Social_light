@@ -18,6 +18,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0
 # Set the working directory
 WORKDIR /app
 
+
 # Copy the output from the build stage
 COPY --from=build-env /app/out .
 
