@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -22,22 +23,33 @@ namespace Social_Light_COMMENT.Controllers
         private readonly ResponseDto _responseDto;
         private readonly AppDbContext _Context;
 
-        public CommentsController(ICommentsService commentInterface, IMapper mapper, ResponseDto responseDto, AppDbContext appContext)
+        public CommentsController(ICommentsService commentInterface, IMapper mapper, AppDbContext appContext)
         {
             _commentInterface = commentInterface;
             _mapper = mapper;
-            _responseDto = responseDto;
+            _responseDto = new ResponseDto();
             _Context = appContext;
         }
 
-        // crude
+        // crud
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<ResponseDto>> CreateComments(CommentDto commentDto)
+        public async Task<ActionResult<ResponseDto>> CreateComments(CommentCreateDto commentDto)
         {
             try
             {
+                // get token form header 
+                var token = Request.Headers["Authorization"].FirstOrDefault();
+                //  decode token
+                var Splittoken = token.Split(" ")[1];
+                var decodetoken = new JwtSecurityTokenHandler();
+                var jwtToken = decodetoken.ReadJwtToken(Splittoken);
+                var userId = jwtToken.Claims.FirstOrDefault(x => x.Type == "sub").Value;
+
+                // get user id from token
+
                 var Comment = _mapper.Map<Comment>(commentDto);
+                Comment.UserId = userId;
                 var CommentResults = await _commentInterface.CreateComments(Comment);
                 if (!string.IsNullOrWhiteSpace(CommentResults))
                 {
@@ -59,7 +71,7 @@ namespace Social_Light_COMMENT.Controllers
             }
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("/{userId}")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetComments(string userId)
         {
@@ -153,7 +165,7 @@ namespace Social_Light_COMMENT.Controllers
             }
         }
 
-        [HttpGet("posts/comments")]
+        [HttpGet("posts/comments/{postId}")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetPostComments(string postId)
         {
@@ -178,6 +190,31 @@ namespace Social_Light_COMMENT.Controllers
                 return BadRequest(_responseDto);
             }
         }
-
+        // get all comments
+        [HttpGet]
+        public async Task<ActionResult<ResponseDto>> GetAllComments()
+        {
+            try
+            {
+                var comments = await _commentInterface.GetAllComments();
+                if (comments == null)
+                {
+                    _responseDto.Message = "No Comments Found";
+                    _responseDto.IsSuccess = false;
+                    return BadRequest(_responseDto);
+                }
+                _responseDto.Message = "";
+                _responseDto.IsSuccess = true;
+                _responseDto.Result = comments;
+                return Ok(_responseDto);
+            }
+            catch (Exception e)
+            {
+                _responseDto.Message = e.Message;
+                _responseDto.IsSuccess = false;
+                return BadRequest(_responseDto);
+            }
+        
+        }
     }
 }

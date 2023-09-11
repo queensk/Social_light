@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Social_Light_COMMENT.Data;
 using Social_Light_COMMENT.Models;
 using Social_Light_COMMENT.Models.DTO;
@@ -13,13 +14,10 @@ namespace Social_Light_COMMENT.Services
     public class CommentsService : ICommentsService
     {
         private readonly AppDbContext _Context;
-        private readonly IMapper _mapper;
-        private readonly ICommentsService _CommentsService;
 
-        public CommentsService(AppDbContext appDbContext, IMapper mapper)
+        public CommentsService(AppDbContext appDbContext)
         {
             _Context = appDbContext;
-            _mapper = mapper;
         }
         public async Task<string> CreateComments(Comment CommentsDto)
         {
@@ -51,7 +49,7 @@ namespace Social_Light_COMMENT.Services
 
         public async Task<Comment> GetUserComments(string userId)
         {
-            return _Context.Comments.FirstOrDefault(c => c.UserId == userId);
+            return await _Context.Comments.FirstOrDefaultAsync(c => c.UserId == userId);
         }
 
         public async Task<string> UpdateUserComments(Comment CommentsDto)
@@ -70,7 +68,12 @@ namespace Social_Light_COMMENT.Services
 
         public async Task<List<Comment>> GetPostComments(string postId)
         {
-            return _Context.Comments.Where(c => c.PostId == postId).ToList();
+            return await _Context.Comments.Where(c => c.PostId == postId).ToListAsync();
+        }
+
+        public async Task<List<Comment>> GetAllComments()
+        {
+            return await _Context.Comments.ToListAsync();
         }
     }
 }

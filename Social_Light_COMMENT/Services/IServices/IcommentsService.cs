@@ -17,6 +17,8 @@ namespace Social_Light_COMMENT.Services.IServices
 
         Task<string> DeleteUserComments(Comment Comment);
         Task<List<Comment>> GetPostComments(string postId);
+        // get all comments
+        Task<List<Comment>> GetAllComments();
     }
 
 }

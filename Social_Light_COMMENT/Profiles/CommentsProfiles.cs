@@ -12,6 +12,7 @@ namespace Social_Light_COMMENT.Profiles
     {
         public CommentsProfiles(){
             CreateMap<Comment, CommentDto>().ReverseMap();
+            CreateMap<Comment, CommentCreateDto>().ReverseMap();
         }
     }
 }

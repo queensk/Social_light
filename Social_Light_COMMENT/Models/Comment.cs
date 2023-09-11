@@ -11,8 +11,8 @@ namespace Social_Light_COMMENT.Models
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public string UserId { get; set; } = string.Empty;
-        public User User { get; set; }
+        public User? User { get; set; }
         public string PostId { get; set; } = string.Empty;
-        public Post Post { get; set; }
+        public Post? Post { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Social_Light_COMMENT.Data;
+using Social_Light_COMMENT.Extensions;
 using Social_Light_COMMENT.Services;
 using Social_Light_COMMENT.Services.IServices;
 
@@ -22,15 +23,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddHttpContextAccessor();
-//Services
 builder.Services.AddScoped<ICommentsService, CommentsService>();
-// builder.Services.AddScoped<IProductInterface, ProductService>();
-// builder.Services.AddScoped<ICouponService, CouponService>();
-// builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
-//Registering the Base Url for the services
-// builder.Services.AddHttpClient("Product", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:ProductApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
-// builder.Services.AddHttpClient("Coupon", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CouponApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
+builder.Services.AddHttpContextAccessor();
+
+
+//custom builders
+builder.AddSwaggerGenExtension();
+builder.AddAppAuthentication();
 
 var app = builder.Build();
 
@@ -40,7 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMigration();
+app.UseAuthentication();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

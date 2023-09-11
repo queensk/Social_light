@@ -7,8 +7,8 @@ namespace Social_Light_COMMENT.Models.DTO
 {
     public class UserCommentsDTO
     {
-        public string UserId {get; set;}
+        public string? UserId {get; set;}
         public Guid CommentId {get; set;}
-        public string postId {get; set;}
+        public string? postId {get; set;}
     }
 }
