@@ -37,7 +37,7 @@ namespace Social_Light_Auth.Service
             {
                 Issuer = _jwtOptions.Issuer,
                 Audience = _jwtOptions.Audience,
-                Expires = _jwtOptions.ExpiryMinutes,
+                Expires = DateTime.UtcNow.AddHours(3),
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = credentials
             };

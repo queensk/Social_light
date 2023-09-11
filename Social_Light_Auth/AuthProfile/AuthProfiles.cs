@@ -13,12 +13,11 @@ namespace Social_Light_Auth.AuthProfile
     {
         public AuthProfiles()
         {
-            CreateMap<UserDTO, ApplicationUser>()
-                .ForMember(u => u.UserName, opt => opt.MapFrom(u => u.Email));
+            // CreateMap<UserDTO, ApplicationUser>().ForMember(u => u.UserName, opt => opt.MapFrom(u => u.Email));
+            CreateMap<UserDTO, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, UserResponseDTO>().ReverseMap();
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
-            // CreateMap<ApplicationUser, UserLoginDTO>().ReverseMap();
-            // CreateMap<ApplicationUser, UserRegisterDTO>().ReverseMap();
+
         }
     }
 }

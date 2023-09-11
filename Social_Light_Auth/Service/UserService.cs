@@ -69,6 +69,7 @@ namespace Social_Light_Auth.Service
             try
             {
                 var user = _mapper.Map<ApplicationUser>(userDTO);
+                user.UserName = userDTO.Email;
                 var result = await _userManager.CreateAsync(user, userDTO.Password);
                 return result.Succeeded ? "User created successfully" : result.Errors.FirstOrDefault().Description;;
             }

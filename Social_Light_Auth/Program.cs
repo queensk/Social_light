@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
-// dependacy injections
+// dependant injections
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJWtTokenGenerator, JwtService>();
 builder.Services.AddScoped<IMessageBus, SocialMessageBus>();
@@ -42,7 +42,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMigration();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
