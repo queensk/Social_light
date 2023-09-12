@@ -13,11 +13,11 @@ namespace Social_Light_POST.Models
         [Required]
         public string Title { get; set; } = string.Empty;
         [Required]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public string UserId { get; set; } 
+        public string? UserId { get; set; } 
         [NotMapped]
-        public User User { get; set; } 
+        public User? User { get; set; } 
         [NotMapped]
         public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
     }

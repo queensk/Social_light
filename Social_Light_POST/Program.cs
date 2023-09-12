@@ -14,29 +14,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
-});
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddHttpContextAccessor();
 
 //Services
+builder.Services.AddScoped<ICommentService, CommentsService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
-builder.Services.AddScoped<ICommentService, CommentsService>();
 
 builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentsApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
-    
+builder.Services.AddHttpClient("Users", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:UsersApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
+
+
+
 
 //custom builders
-
 builder.AddSwaggerGenExtension();
 builder.AddAppAuthentication();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

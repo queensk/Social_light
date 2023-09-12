@@ -13,12 +13,13 @@ namespace Social_Light_POST.Services
     public class PostService : IPostService
     {
         private readonly AppDbContext _context;
-        private readonly CommentsService _commentsService;
+        private readonly ICommentService _commentsService;
 
-        public PostService(AppDbContext context)
+        public PostService(AppDbContext context, ICommentService commentsService)
         {
+            _commentsService = commentsService;
             _context = context;
-        }
+        }        
         public async Task<string> AddPostAsync(Post post)
         {
             try
@@ -45,7 +46,7 @@ namespace Social_Light_POST.Services
                 return ex.Message;
             }
         }
-        public async Task<Post> GetPostByIdAsync(Guid id)
+        public async Task<Post?> GetPostByIdAsync(Guid id)
         {
             return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
         }

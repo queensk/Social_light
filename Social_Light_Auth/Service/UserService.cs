@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Social_Light_Auth.Data;
 using Social_Light_Auth.Models;
 using Social_Light_Auth.Models.DTO;
@@ -37,9 +38,11 @@ namespace Social_Light_Auth.Service
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO> GetUserById(string id)
+        public async Task<UserResponseDTO> GetUserById(string id)
         {
-            throw new NotImplementedException();
+            var user =  await _userManager.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+            var userDTO = _mapper.Map<UserResponseDTO>(user);
+            return userDTO;
         }
 
         public Task<UserDTO> GetUsersPost(string id)

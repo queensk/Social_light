@@ -23,8 +23,6 @@ namespace Social_light_Message_Bus.MessageBus
             {
                 CorrelationId = Guid.NewGuid().ToString(),
             };
-
-
             await sender.SendMessageAsync(theMessage);
             await serviceBus.DisposeAsync();
         }

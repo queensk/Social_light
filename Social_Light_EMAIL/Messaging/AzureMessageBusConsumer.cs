@@ -28,7 +28,7 @@ namespace Social_Light_EMAIL.Messaging
             _configuration = configuration;
             Connectionstring = _configuration.GetSection("ServiceBus:ConnectionString").Get<string>();
             QueueName = _configuration.GetSection("QueuesandTopics:RegisterUser").Get<string>();
-            // topic = _configuration.GetSection("AzureService:Topic").Get<string>();
+            topic = _configuration.GetSection("AzureService:Topic").Get<string>();
             subscription = _configuration.GetSection("AzureService:Subscription").Get<string>();
             
             var servicesBusClient = new ServiceBusClient(Connectionstring);
@@ -79,9 +79,6 @@ namespace Social_Light_EMAIL.Messaging
 
         private Task ErrorHandler(ProcessErrorEventArgs arg)
         {
-
-            //[Todo] send an email to Admin
-
             Console.WriteLine(arg.Exception.ToString());
             return Task.CompletedTask;
         }
@@ -89,9 +86,7 @@ namespace Social_Light_EMAIL.Messaging
         private async Task OnRegistartion(ProcessMessageEventArgs arg)
         {
             var message= arg.Message;
-
             var body = Encoding.UTF8.GetString(message.Body);
-
             var userMessage= JsonConvert.DeserializeObject<UserMessage>(body);
 
             try
@@ -115,7 +110,6 @@ namespace Social_Light_EMAIL.Messaging
                 //you can delete the message from the queue
                  await arg.CompleteMessageAsync(message);
             }catch (Exception ex) {
-
 
              }
         }

@@ -10,7 +10,7 @@ namespace Social_Light_POST.Services.IService
     public interface IPostService
     {
         Task<IEnumerable<Post>> GetPostsAsync();
-        Task<Post> GetPostByIdAsync(Guid id);
+        Task<Post?> GetPostByIdAsync(Guid id);
         Task<string> AddPostAsync(Post post);
         Task<string> DeletePostAsync(Post post);
         Task<string> UpdatePostAsync(Post post);

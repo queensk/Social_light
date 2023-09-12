@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -60,7 +61,9 @@ namespace Social_Light_POST.Controllers
         {
             try
             {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var newPost = _mapper.Map<Post>(postDto);
+                newPost.UserId = userId;
                 var response = await _postInterface.AddPostAsync(newPost);
                 if (string.IsNullOrWhiteSpace(response))
                 {
@@ -156,7 +159,7 @@ namespace Social_Light_POST.Controllers
                 return BadRequest(_responseDto);
             }
         }
-        [HttpGet("GetPostAndComments/{Id}")]
+        [HttpGet("GetPostAndComments")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetUserPostsAndComments(string userId)
         {

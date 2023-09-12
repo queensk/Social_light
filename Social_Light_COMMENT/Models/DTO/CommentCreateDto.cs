@@ -9,6 +9,6 @@ namespace Social_Light_COMMENT.Models.DTO
     {
         public string? Content { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int PostId { get; set; }   
+        public string PostId { get; set; }  = string.Empty; 
     }
 }

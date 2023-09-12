@@ -10,8 +10,8 @@ namespace Social_Light_POST.Models
     [NotMapped]
     public class User
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
     }
 }

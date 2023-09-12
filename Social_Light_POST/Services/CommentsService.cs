@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Social_Light_POST.Models.DTO;
 using Social_Light_POST.Services.IService;
@@ -19,16 +15,24 @@ namespace Social_Light_POST.Services
         }
         public async Task<IEnumerable<CommentDto>> GetAllCommentsData(string postId)
         {
-            var client = _clientFactory.CreateClient("Comments");
-            var response = await client.GetAsync($"/api/Comments/posts/comments/{postId}");
-            var content = await response.Content.ReadAsStringAsync();
-            var responseDto = JsonConvert.DeserializeObject<ResponseDto>(content);
-
-            if (responseDto.IsSuccess)
+            try
             {
-                return JsonConvert.DeserializeObject<IEnumerable<CommentDto>>(Convert.ToString(responseDto.Result));
+                var client = _clientFactory.CreateClient("Comments");
+                var response = await client.GetAsync($"/api/Comments/posts/comments/{postId}");
+                var content = await response.Content.ReadAsStringAsync();
+                var responseDto = JsonConvert.DeserializeObject<ResponseDto>(content);
+
+                if (responseDto.IsSuccess)
+                {
+                    return JsonConvert.DeserializeObject<List<CommentDto>>(Convert.ToString(responseDto.Result));
+                }
+                return new List<CommentDto>();
             }
-            return new List<CommentDto>();
+            catch (Exception ex)
+            {
+                return new List<CommentDto>();
+            }
+
         }
     }
 }

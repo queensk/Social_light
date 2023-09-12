@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Social_Light_Auth.Models;
 using Social_Light_Auth.Models.DTO;
@@ -104,5 +105,25 @@ namespace Social_Light_Auth.Controllers
                 return Ok(_responseDTO);
             }
         }
-    }
+        // get user data by id 
+        [HttpGet("/{UserId}")]
+        [Authorize]
+        public async Task<ActionResult<ResponseDTO>> GetUserById(string UserId)
+        {
+            try
+            {
+                var response = await _userService.GetUserById(UserId);
+                _responseDTO.Message = "Success";
+                _responseDTO.IsSuccess = true;
+                _responseDTO.Data = response;
+                return Ok(_responseDTO);            
+            }
+            catch(Exception ex){
+                _responseDTO.Message = ex.Message;
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Data = null;
+                return Ok(_responseDTO);
+            }
+        }
+    } 
 }

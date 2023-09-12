@@ -23,7 +23,7 @@ namespace Social_Light_Auth.Service.IService
         Task<List<UserDTO>> GetAllUser();
 
         // get user by id
-        Task<UserDTO> GetUserById(string id);
+        Task<UserResponseDTO> GetUserById(string id);
 
         // get a users post
         Task<UserDTO> GetUsersPost(string id);
