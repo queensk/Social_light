@@ -19,15 +19,13 @@ namespace Social_Light_POST.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPostService _postInterface;
-        private readonly ICommentService _commentInterface;
         private readonly ResponseDto _responseDto;
 
-        public PostsController(IMapper mapper, IPostService postInterface, ICommentService commentService)
+        public PostsController(IMapper mapper, IPostService postInterface)
         {
             _mapper = mapper;
             _postInterface = postInterface;
             _responseDto = new ResponseDto();
-            _commentInterface = commentService;
         }
 
         [HttpGet]
