@@ -24,6 +24,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICommentService, CommentsService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
+
+//Cors policy
 builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
 {
     build.WithOrigins("https://localhost:7203");

@@ -1,6 +1,22 @@
-﻿<div class="header">
+﻿@inject NavigationManager navigationManager
+<div class="header">
 <h1>Social_Light</h1>
+ <div class="flex-row">
+    <button class="btn btn-primary" @onclick = "login">Login</button>
+    <button class="btn btn-primary" @onclick = "register">Register</button>
+    <button class="btn btn-danger">Logout</button>
+ </div>
 </div>
 @code 
 {
+    // altnernative --- use a tags and href
+    private void register()
+    {
+        navigationManager.NavigateTo("/register");
+    }
+
+    private void login()
+    {
+        navigationManager.NavigateTo("/login");
+    }
 }

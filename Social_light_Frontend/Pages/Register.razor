@@ -1,0 +1,53 @@
+﻿@page "/register"
+@inject IAuthInterface authInterface
+
+<div class="row m-2">
+    <div class="col-6">
+        <img class="h-100 w-100" src="https://media.istockphoto.com/id/1463013729/photo/online-registration-form-for-modish-form-filling.webp?b=1&s=612x612&w=0&k=20&c=jMEIqTpmOfuwX1G60ifO8LrMtgFLEPPznPz0jLiAW5s=" />
+    </div>
+
+    <div class="col-6">
+        <h1> Register User</h1>
+        <EditForm Model="@newUser" OnValidSubmit="registerUser">
+            <DataAnnotationsValidator/>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+                <InputText type="text" class="form-control p-2" id="name" @bind-Value="@newUser.Name" aria-describedby="name"/>
+                <ValidationMessage For="@(()=>newUser.Name)"/>
+            </div>
+
+            <div class="form-group p-2">
+                <label for="name">Email</label>
+                <InputText type="email" class="form-control p-2" id="email" @bind-Value="@newUser.Email" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Email)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="password">PassWord</label>
+                <InputText type="text" class="form-control p-2" id="password" @bind-Value="@newUser.Password" aria-describedby="name" />
+                <ValidationMessage For="@(()=>newUser.Password)" />
+            </div>
+
+            <div class="flex-row m-2" p-2>
+                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
+                <button type="button" style="width:100px"  class="p-2 btn btn-secondary">Reset</button>
+            </div>
+            <div class="row">
+                <p class="col-4">Already a member? <a class="col-1" href="login">Login</a></p>
+                
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+
+@code {
+    private RegisterRequestDto newUser = new RegisterRequestDto();
+
+    private async Task registerUser()
+    {   
+        var response = await authInterface.Register(newUser);
+        Console.WriteLine(response.Result);
+    }
+
+}
