@@ -19,9 +19,9 @@ namespace Social_Light_Auth.Models.DTO
         [Required]
         public string Password { get; set; }=string.Empty;
 
-        [Required]
+        // [Required]
         public string PhoneNumber { get; set; } = string.Empty;
-        public string? Role { get; set; } = string.Empty; 
+        public string? Role { get; set; } = "User"; 
         
     }
 }
