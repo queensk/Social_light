@@ -34,9 +34,7 @@ namespace Social_light_Frontend.Services.Auth
         public async Task<ResponseDto> Register(RegisterRequestDto registerRequestDto)
         {
             var req = JsonConvert.SerializeObject(registerRequestDto);
-            Console.WriteLine(req);
             var bodyContent = new StringContent(req, Encoding.UTF8, "application/json");
-            Console.WriteLine(bodyContent);
 
             // communicate with backend ---api
             var response = await _httpClient.PostAsync($"{BASEURL}/api/User/register", bodyContent);
