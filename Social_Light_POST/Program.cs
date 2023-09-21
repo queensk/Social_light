@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Social_Light_POST.Data;
 using Social_Light_POST.Extensions;
 using Social_Light_POST.Services;
@@ -24,6 +25,14 @@ builder.Services.AddScoped<ICommentService, CommentsService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 
+//Cors policy
+builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
+{
+    build.WithOrigins("https://localhost:7203");
+    build.AllowAnyHeader();
+    build.AllowAnyMethod();
+}));
+
 builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentsApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddHttpClient("Users", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:UsersApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 
@@ -48,7 +57,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
+app.UseCors("policy1");
 app.MapControllers();
 
 app.Run();

@@ -20,6 +20,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
+//Cors policy
+builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
+{
+    build.WithOrigins("https://localhost:7203");
+    build.AllowAnyHeader();
+    build.AllowAnyMethod();
+}));
+
 // dependant injections
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJWtTokenGenerator, JwtService>();
@@ -46,5 +54,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("policy1");
 
 app.Run();
