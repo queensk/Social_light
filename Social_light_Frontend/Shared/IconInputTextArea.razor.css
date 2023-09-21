@@ -1,0 +1,46 @@
+/* IconInputTextArea.razor.css */
+
+/* Container for the icon input */
+.icon-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+/* Textarea input field */
+.icon-input textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 100px; /* Adjust the height as needed */
+}
+
+/* Icon container */
+.input-icons {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+/* Individual icon */
+.input-icon {
+    cursor: pointer;
+    margin-right: 16px;
+    font-size: 24px;
+    color: #333; /* Icon color */
+}
+
+/* Validation message */
+.validation-message {
+    color: #ff0000; /* Red color for error messages */
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Styling for the icons (you can customize further) */
+.icon-input .bi {
+    vertical-align: text-top;
+}
