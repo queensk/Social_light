@@ -1,0 +1,53 @@
+@page "/login"
+@inject IAuthInterface authInterface
+
+<div class="row m-8">
+    <div class="col-6">
+        <img class="h-100 w-100" src="https://cdn.pixabay.com/photo/2022/03/31/13/50/login-7103076_1280.png" />
+    </div>
+
+    <div class="col-6">
+        <h1>Login</h1>
+        <EditForm Model="@user" OnValidSubmit="loginUser">
+            <DataAnnotationsValidator/>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+                <InputText type="text" class="form-control p-2" id="name" @bind-Value="@user.Name" aria-describedby="name"/>
+                <ValidationMessage For="@(()=>user.Name)"/>
+            </div>
+
+            <div class="form-group p-2">
+                <label for="name">Email</label>
+                <InputText type="email" class="form-control p-2" id="email" @bind-Value="@user.Email" aria-describedby="name" />
+                <ValidationMessage For="@(()=>user.Email)" />
+            </div>
+
+            <div class="form-group p-2">
+                <label for="password">Password</label>
+                <InputText type="text" class="form-control p-2" id="password" @bind-Value="@user.Password" aria-describedby="name" />
+                <ValidationMessage For="@(()=>user.Password)" />
+            </div>
+
+            <div class="flex-row m-2" p-2>
+                <button type="submit" style="width:100px" class=" p-2 m-1 btn btn-primary">Submit</button>
+                <button type="button" style="width:100px"  class="p-2 btn btn-secondary">Reset</button>
+            </div>
+            <div class="row">
+                <p class="col-4">No Account ? <a class="col-1" href="register">Create Account</a></p>
+                
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+
+@code {
+    private LoginRequestDto user = new LoginRequestDto();
+
+    private async Task loginUser()
+    {   
+        var response = await authInterface.Login(user);
+        Console.WriteLine(response.Token);
+    }
+
+}
