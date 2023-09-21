@@ -1,6 +1,6 @@
 ﻿@page "/register"
 @inject IAuthInterface authInterface
-
+@inject NavigationManager navigat
 <div class="row m-2">
     <div class="col-6">
         <img class="h-100 w-100" src="https://media.istockphoto.com/id/1463013729/photo/online-registration-form-for-modish-form-filling.webp?b=1&s=612x612&w=0&k=20&c=jMEIqTpmOfuwX1G60ifO8LrMtgFLEPPznPz0jLiAW5s=" />
@@ -47,7 +47,14 @@
     private async Task registerUser()
     {   
         var response = await authInterface.Register(newUser);
-        Console.WriteLine(response.Result);
+        if (response.IsSuccess)
+        {
+            navigat.NavigateTo("/login");
+        }
+        else
+        {
+            Console.WriteLine(response.Message);
+        }
     }
 
 }
