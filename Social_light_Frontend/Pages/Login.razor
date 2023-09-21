@@ -1,5 +1,8 @@
 @page "/login"
 @inject IAuthInterface authInterface
+@inject ILocalStorageService localStorageService
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navigationManager
 
 <div class="row m-8">
     <div class="col-6">
@@ -49,6 +52,13 @@
     {   
         var response = await authInterface.Login(user);
         Console.WriteLine(response.Token);
+
+        if (!string.IsNullOrEmpty(response.Token))
+        {
+            await localStorageService.SetItemAsStringAsync("authToken", response.Token);
+            await authStateProvider.GetAuthenticationStateAsync();
+            navigationManager.NavigateTo("/"); // redirect to home page
+        }
     }
 
 }

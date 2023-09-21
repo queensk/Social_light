@@ -1,10 +1,24 @@
 ﻿@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
+@inject ILocalStorageService localStorageService
+
 <div class="header">
 <h1>Social_Light</h1>
+
  <div class="flex-row">
-    <button class="btn btn-primary" @onclick = "login">Login</button>
-    <button class="btn btn-primary" @onclick = "register">Register</button>
-    <button class="btn btn-danger">Logout</button>
+    
+ </div>
+ <div class="flex-row">
+    <AuthorizeView>
+        <Authorized>
+            <button class="btn btn-danger" @onclick = "logout">Logout</button>
+        </Authorized>
+        <NotAuthorized>
+            <button class="btn btn-primary" @onclick = "login">Login</button>
+            <button class="btn btn-primary" @onclick = "register">Register</button>
+        </NotAuthorized>
+    </AuthorizeView>
+    
  </div>
 </div>
 @code 
@@ -18,5 +32,13 @@
     private void login()
     {
         navigationManager.NavigateTo("/login");
+    }
+
+    private async Task logout()
+    {
+        // remove token from local storage and notify auth state provider
+        await localStorageService.RemoveItemAsync("authToken"); 
+        await authStateProvider.GetAuthenticationStateAsync(); 
+        navigationManager.NavigateTo("/"); // navigate to home page
     }
 }
