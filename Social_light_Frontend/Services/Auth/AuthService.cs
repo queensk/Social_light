@@ -18,14 +18,13 @@ namespace Social_light_Frontend.Services.Auth
             var req = JsonConvert.SerializeObject(loginRequestDto);
             var bodyContent = new StringContent(req, Encoding.UTF8, "application/json");
 
-            // communicate with backend ---api
             var response = await _httpClient.PostAsync($"{BASEURL}/api/User/login", bodyContent);
             var content = await response.Content.ReadAsStringAsync();
 
             var results = JsonConvert.DeserializeObject<ResponseDto>(content);
             if (results.IsSuccess)
             {
-                return JsonConvert.DeserializeObject<LoginResponseDto>(results.Result.ToString());
+                return JsonConvert.DeserializeObject<LoginResponseDto>(results.Data.ToString());
             }
             return new LoginResponseDto();
 
@@ -36,7 +35,6 @@ namespace Social_light_Frontend.Services.Auth
             var req = JsonConvert.SerializeObject(registerRequestDto);
             var bodyContent = new StringContent(req, Encoding.UTF8, "application/json");
 
-            // communicate with backend ---api
             var response = await _httpClient.PostAsync($"{BASEURL}/api/User/register", bodyContent);
             var content = await response.Content.ReadAsStringAsync();
             var results = JsonConvert.DeserializeObject<ResponseDto>(content);

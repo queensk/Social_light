@@ -1,17 +1,51 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authProvider
+@inject ILocalStorageService localStorage
 
-<div class="main-container">
-    <div class="">
-
+<div class="page">
+    <div class="sidebar">
         <NavMenu />
     </div>
 
-    <main class="container mb-3 ">
-        @Body
-
+    <main>
+        <div class="top-row px-4">
+            <div class="flex-row">
+                <CascadingAuthenticationState>
+                    <AuthorizeView>
+                        <Authorized>
+                            <button class="btn btn-danger" @onclick="logout">Logout</button>
+                        </Authorized>
+                        <NotAuthorized>
+                            <button class="btn btn-primary" @onclick = "login">Login</button>
+                            <button class="btn btn-primary" @onclick = "register">Register</button>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </CascadingAuthenticationState>
+            </div>
+        </div>
+        <article class="content px-4">
+            @Body
+        </article>
     </main>
 </div>
 
-@code {
+@code 
+{
+    private void register()
+    {
+        navigationManager.NavigateTo("/register");
+    }
 
+    private void login()
+    {
+        navigationManager.NavigateTo("/login");
+    }
+
+    private async Task logout()
+    {
+        await localStorage.RemoveItemAsync("authToken");
+        await authProvider.GetAuthenticationStateAsync();
+        navigationManager.NavigateTo("");
+    }
 }
