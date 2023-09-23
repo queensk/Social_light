@@ -1,0 +1,57 @@
+﻿@page "/"
+@attribute [Authorize]
+<div>
+    <div>
+        <Post PostData="postData1" PostMetadata="postMetadata1" />
+    </div>
+
+    <div>
+        <Post PostData="postData2" PostMetadata="postMetadata2" />
+    </div>
+</div>
+
+@code {
+    private bool isLoading = true;
+    private string role { get; set; }
+    private bool authenticated { get; set; }
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = false;
+        var authState = await _authState;
+        role = authState.User.FindFirst("role")?.Value;
+        authenticated = authState.User.Identity.IsAuthenticated;
+        Console.WriteLine(authenticated);
+    }
+    
+    private PostDataDto postData1 = new PostDataDto
+    {
+        ProfileImageUrl = "https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg",
+        OwnerName = "User1",
+        ImageUrl = "https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg",
+        Text = "This is the first post."
+    };
+
+    private PostDataDto postData2 = new PostDataDto
+    {
+        ProfileImageUrl = "https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg",
+        OwnerName = "User2",
+        ImageUrl = "https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg",
+        Text = "This is the second post."
+    };
+
+    private PostMetadataDto postMetadata1 = new PostMetadataDto
+    {
+        IsLiked = false,
+        LikeCount = 5
+    };
+
+    private PostMetadataDto postMetadata2 = new PostMetadataDto
+    {
+        IsLiked = true,
+        LikeCount = 10
+        // Add more metadata properties as needed
+    };
+}

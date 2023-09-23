@@ -7,7 +7,7 @@ namespace Social_light_Frontend.Models
 {
     public class ResponseDto
     {
-        public object? Result { get; set; }
+        public object? Data { get; set; }
 
         public bool IsSuccess { get; set; } = false;
 
