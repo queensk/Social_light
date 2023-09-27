@@ -13,6 +13,10 @@ namespace Social_Light_POST.Profiles
         public PostProfile()
         {
             CreateMap<PostRequestDto, Post>().ReverseMap();
+            CreateMap<CommentDto, Comment>().ReverseMap();
+            CreateMap<CommentDto, Comment>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<IEnumerable<CommentDto>, IEnumerable<Comment>>();
         }
     }
 }

@@ -14,6 +14,6 @@ namespace Social_Light_POST.Services.IService
         Task<string> AddPostAsync(Post post);
         Task<string> DeletePostAsync(Post post);
         Task<string> UpdatePostAsync(Post post);
-        Task<IEnumerable<UserPostsAndCommentsDto>> GetUserPostsAndCommentsAsync(string userId);
+        Task<IEnumerable<Post>> GetUserPostsAndCommentsAsync(string userId);
     }
 }

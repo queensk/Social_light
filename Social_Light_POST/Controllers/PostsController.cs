@@ -20,13 +20,16 @@ namespace Social_Light_POST.Controllers
         private readonly IMapper _mapper;
         private readonly IPostService _postInterface;
         private readonly ResponseDto _responseDto;
+        private readonly IAzureStorageService _azureStorageService;
 
-        public PostsController(IMapper mapper, IPostService postInterface)
+        public PostsController(IMapper mapper, IPostService postInterface, IAzureStorageService azureStorageService)
         {
             _mapper = mapper;
             _postInterface = postInterface;
             _responseDto = new ResponseDto();
+            _azureStorageService = azureStorageService;
         }
+        
 
         [HttpGet]
         [Authorize]
@@ -61,6 +64,8 @@ namespace Social_Light_POST.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var newPost = _mapper.Map<Post>(postDto);
+                // upload image to azure blob
+                // var image = await _azureStorageService.UploadFileToStorage()
                 newPost.UserId = userId;
                 var response = await _postInterface.AddPostAsync(newPost);
                 if (string.IsNullOrWhiteSpace(response))

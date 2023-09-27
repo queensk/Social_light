@@ -13,10 +13,6 @@ namespace Social_Light_POST.Models.DTO
         public string Title { get; set; } = string.Empty;
         [Required]
         public string? Content { get; set; }
-        [Required]
-        [NotMapped]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        // [Required]
-        // public string? UserId { get; set; } 
+        public string? PostImage { get; set; }
     }
 }

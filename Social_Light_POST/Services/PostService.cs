@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Social_Light_POST.Data;
 using Social_Light_POST.Models;
@@ -12,14 +13,16 @@ namespace Social_Light_POST.Services
 {
     public class PostService : IPostService
     {
+        private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly ICommentService _commentsService;
 
-        public PostService(AppDbContext context, ICommentService commentsService)
+        public PostService(AppDbContext context, ICommentService commentsService, IMapper mapper)
         {
-            _commentsService = commentsService;
+            _mapper = mapper;
             _context = context;
-        }        
+            _commentsService = commentsService;
+        }
         public async Task<string> AddPostAsync(Post post)
         {
             try
@@ -67,23 +70,18 @@ namespace Social_Light_POST.Services
                 return ex.Message;
             }
         }
-        public async Task<IEnumerable<UserPostsAndCommentsDto>> GetUserPostsAndCommentsAsync(string userId)
+        public async Task<IEnumerable<Post>> GetUserPostsAndCommentsAsync(string userId)
         {
             var userPosts = await _context.Posts.Where(p => p.UserId == userId).ToListAsync();
-            var userPostsAndComments = new List<UserPostsAndCommentsDto>();
 
-            foreach (var post in userPosts)
+            foreach (Post post in userPosts)
             {
                 var postComments = await _commentsService.GetAllCommentsData(post.Id.ToString());
 
-                userPostsAndComments.Add(new UserPostsAndCommentsDto
-                {
-                    Post = post,
-                    Comments = postComments
-                });
+                post.Comments = postComments;
             }
 
-            return userPostsAndComments;
+            return userPosts;
         }
     }
 }
