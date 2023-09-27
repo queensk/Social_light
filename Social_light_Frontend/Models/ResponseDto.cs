@@ -12,5 +12,6 @@ namespace Social_light_Frontend.Models
         public bool IsSuccess { get; set; } = false;
 
         public string Message { get; set; } = string.Empty;
+        public object? Result { get; set; }
     }
 }

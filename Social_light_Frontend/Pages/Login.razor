@@ -46,10 +46,11 @@
     {   
         var response = await authInterface.Login(user);
         Console.WriteLine(response.Token);
+        string [] tokenDat =response.Token.Split(' ');
         if (!string.IsNullOrWhiteSpace(response.Token))
         {
             Console.WriteLine(response.Token);
-            await localStorage.SetItemAsStringAsync("authToken", response.Token);
+            await localStorage.SetItemAsStringAsync("authToken", tokenDat[1]);
             await authProvider.GetAuthenticationStateAsync();
             navigationManager.NavigateTo("");
         }
