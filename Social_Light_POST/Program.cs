@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Social_Light_POST.Data;
 using Social_Light_POST.Extensions;
+using Social_Light_POST.Models.Config;
 using Social_Light_POST.Services;
 using Social_Light_POST.Services.IService;
 using Social_Light_POST.Utility;
@@ -24,11 +25,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICommentService, CommentsService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
+builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
 
 //Cors policy
 builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
 {
-    build.WithOrigins("https://localhost:7203");
+    // build.WithOrigins("https://localhost:7203", "http://localhost:7203");
+    build.AllowAnyOrigin();
     build.AllowAnyHeader();
     build.AllowAnyMethod();
 }));
@@ -36,6 +39,10 @@ builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
 builder.Services.AddHttpClient("Comments", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:CommentsApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddHttpClient("Users", c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrl:UsersApi"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 
+builder.Services.Configure<AzureStorageConfig>(options => {
+    options.AccountName =builder.Configuration.GetValue<string>("AzureStorageConfig:AccountName");
+    options.AccountKey = builder.Configuration.GetValue<string>("AzureStorageConfig:AccountKey");
+});
 
 
 

@@ -1,14 +1,16 @@
+@inject ICommentService commentService
+@attribute [Authorize]
 <div class="post">
     <div class="post-header">
-        <img src="@PostData.ProfileImageUrl" alt="Profile Image" class="profile-image" />
-        <span class="profile-name">@PostData.OwnerName</span>
+        <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" class="profile-image" />
+        <span class="profile-name">@PostItem?.User?.Name</span>
     </div>
     <div class="post-content">
-        @if (!string.IsNullOrEmpty(PostData.ImageUrl))
+        @if (!string.IsNullOrEmpty(PostItem?.PostImage))
         {
-            <img src="@PostData.ImageUrl" alt="Post Image" class="post-image" />
+            <img src="@PostItem.PostImage" alt="Post Image" class="post-image" />
         }
-        <p>@PostData.Text</p>
+        <p>@PostItem?.Content</p>
     </div>
     <div class="user-icons">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -19,51 +21,73 @@
         </svg>
     </div>
 
-    <div class="comment-section">
+    <div class="container mt-2">
         @if (showCommentInput)
         {
-            <div class="comment-input">
-                <input type="text" placeholder="Add a comment" @bind="newComment" />
-                <button class="btn btn-primary" @onclick="PostComment">Post</button>
+            <div class="row">
+                <div class="col-md-12">
+                    <EditForm Model="commentCreateDto" OnValidSubmit="PostComment" class="row">
+                        <div class="10">
+                                <InputText @bind-Value="@commentCreateDto.Content" class="form-control" placeholder="Add a comment" />
+                                <ValidationMessage For="@(() => commentCreateDto.Content)" />
+                        </div>
+                        <div class="2">
+                            <button type="submit" class="btn btn-primary" disabled="@isPosting">Post</button>
+                            @if (isPosting)
+                            {
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <p>Posting...</p>
+                            }
+                        </div>
+                    </EditForm>
+                </div>
             </div>
+
             <div class="comments">
-                @foreach (var comment in PostMetadata.Comments)
+                @if (PostItem?.Comments.Count() > 0 )
                 {
-                    <div class="comment">
-                        <img src="@comment.ProfileImageUrl" alt="Profile Image" class="comment-profile-image" />
-                        <span class="comment-text">@comment.Text</span>
-                    </div>
+                    @foreach (var comment in PostItem.Comments)
+                    {
+                        <div class="comment">
+                            <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" class="comment-profile-image" />
+                            <span class="comment-text">@comment.Content</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No comments yet.</p>
                 }
             </div>
         }
-
-
     </div>
 </div>
 
 @code {
-    [Parameter] public PostDataDto PostData { get; set; }
-    [Parameter] public PostMetadataDto PostMetadata { get; set; }
-
+    [Parameter] 
+    public PostDto PostItem { get; set; }
     private bool showCommentInput = false;
-    private string newComment = "";
+    private CommentCreateDto commentCreateDto = new CommentCreateDto();
+    private bool isPosting = false;
 
-    private void ToggleCommentInput()
+    private async Task ToggleCommentInput()
     {
+        PostItem.Comments = await commentService.GetPostComments(PostItem.Id);
         showCommentInput = !showCommentInput;
     }
 
-    private void PostComment()
+    private async Task PostComment()
     {
-        if (!string.IsNullOrWhiteSpace(newComment))
+        isPosting = true;
+        commentCreateDto.PostId = PostItem.Id.ToString();
+        Console.WriteLine(commentCreateDto.Content);
+        var result = await commentService.CreateComment(commentCreateDto);
+        
+        if (result.IsSuccess)
         {
-            PostMetadata.Comments.Add(new CommentModel
-            {
-                ProfileImageUrl = "https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg",
-                Text = newComment
-            });
-
-            newComment = ""; 
+            PostItem.Comments = await commentService.GetPostComments(PostItem.Id);
+            commentCreateDto = new CommentCreateDto();
         }
+        isPosting = false;
     }
 }

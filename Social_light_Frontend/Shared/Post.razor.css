@@ -4,6 +4,53 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.user-icons{
+    display: flex;
+}
+
+    /* flex-direction: column; */
+.form-group-two{
+    
+}
+.comment-input .comment-form {
+    display: flex;
+    width: 100%;
+}
+
+.comment-form .form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.comment-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-form button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.comment-form .spinner-border {
+    margin-right: 5px;
+}
+
+.comment-form p {
+    margin: 0;
+}
+
 
 .profile-image {
     width: 40px;
@@ -26,6 +73,7 @@
 .comment-input {
     display: flex;
     margin-top: 10px;
+    width: 100%;
 }
 
 .comment-input input[type="text"] {

@@ -1,0 +1,85 @@
+@page "/Profile"
+@attribute [Authorize]
+@inject IPostService postService
+@inject IJSRuntime jsRuntime
+
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <img src="https://example.com/profile-image.jpg" alt="Profile Image" />
+        </div>
+        <div class="profile-info">
+            <h1>@(loginUserData?.Name ?? "Your Name")</h1>
+            <p>@(loginUserData?.Email ?? "This is your bio.")</p>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="post">
+            @if (postData != null && postData.Any())
+            {
+                @foreach (var PostItem in postData)
+                {
+                    <div class="post-header">
+                        <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" class="profile-image" />
+                        <span class="profile-name">@PostItem?.User?.Name</span>
+                    </div>
+                    <div class="post-content">
+                        @if (!string.IsNullOrEmpty(PostItem?.PostImage))
+                        {
+                            <img src="@PostItem.PostImage" alt="Post Image" class="post-image" />
+                        }
+                        <p>@PostItem?.Content</p>
+                    </div>
+                    <div class="user-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No posts were found</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string username { get; set; }
+
+    [Parameter]
+    public string bio { get; set; }
+    public List<PostDto> postData { get; set; } = new List<PostDto>();
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; }
+
+    public User loginUserData { get; set; } = new User();
+    private Guid userId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+
+        if (authState != null && authState.User != null)
+        {
+            var nameClaim = authState.User.FindFirst("name")?.Value;
+            var emailClaim = authState.User.FindFirst("email")?.Value;
+
+            if (!string.IsNullOrEmpty(nameClaim) && !string.IsNullOrEmpty(emailClaim))
+            {
+                loginUserData.Name = nameClaim;
+                loginUserData.Email = emailClaim;
+            }
+
+            var userIdClaim = authState.User.FindFirst("sub")?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                userId = Guid.Parse(userIdClaim);
+                postData = await postService.GetPostsByUserIdAsync(userId);
+            }
+        }
+    }
+}

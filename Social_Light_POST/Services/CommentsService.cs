@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Social_Light_POST.Models;
 using Social_Light_POST.Models.DTO;
 using Social_Light_POST.Services.IService;
 
@@ -13,7 +14,7 @@ namespace Social_Light_POST.Services
             _clientFactory = clientFactory;
 
         }
-        public async Task<IEnumerable<CommentDto>> GetAllCommentsData(string postId)
+        public async Task<List<Comment>> GetAllCommentsData(string postId)
         {
             try
             {
@@ -24,13 +25,13 @@ namespace Social_Light_POST.Services
 
                 if (responseDto.IsSuccess)
                 {
-                    return JsonConvert.DeserializeObject<List<CommentDto>>(Convert.ToString(responseDto.Result));
+                    return JsonConvert.DeserializeObject<List<Comment>>(Convert.ToString(responseDto.Result));
                 }
-                return new List<CommentDto>();
+                return new List<Comment>();
             }
             catch (Exception ex)
             {
-                return new List<CommentDto>();
+                return new List<Comment>();
             }
 
         }
