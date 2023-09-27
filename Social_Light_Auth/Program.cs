@@ -23,8 +23,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 //Cors policy
 builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
 {
-    build.WithOrigins("https://localhost:7203", "http://localhost:7203");
-
+    build.AllowAnyOrigin();
     build.AllowAnyHeader();
     build.AllowAnyMethod();
 }));
@@ -37,6 +36,7 @@ builder.Services.AddScoped<IMessageBus, SocialMessageBus>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+
 
 
 var app = builder.Build();
