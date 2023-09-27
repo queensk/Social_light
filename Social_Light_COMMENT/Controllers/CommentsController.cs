@@ -54,12 +54,12 @@ namespace Social_Light_COMMENT.Controllers
                 if (!string.IsNullOrWhiteSpace(CommentResults))
                 {
                     _responseDto.Message = CommentResults;
-                    _responseDto.IsSuccess = false;
+                    _responseDto.IsSuccess = true;
                     return BadRequest(_responseDto);
                 }
-
+                
                 _responseDto.Message = CommentResults;
-                _responseDto.IsSuccess = true;
+                _responseDto.IsSuccess = false;
 
                 return Ok(_responseDto);
             }
@@ -71,7 +71,7 @@ namespace Social_Light_COMMENT.Controllers
             }
         }
 
-        [HttpGet("/{userId}")]
+        [HttpGet("user")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetComments(string userId)
         {

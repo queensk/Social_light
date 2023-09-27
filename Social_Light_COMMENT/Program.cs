@@ -22,10 +22,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 builder.Services.AddScoped<ICommentsService, CommentsService>();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
+{
+    // build.WithOrigins("https://localhost:7203", "http://localhost:7203");
+    build.AllowAnyOrigin();
+    build.AllowAnyHeader();
+    build.AllowAnyMethod();
+}));
 
 //custom builders
 builder.AddSwaggerGenExtension();
@@ -46,5 +52,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("policy1");
 
 app.Run();
