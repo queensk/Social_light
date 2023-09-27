@@ -1,0 +1,67 @@
+{
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/Comments/posts/comments/{postId}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7002
+          }
+        ],
+        "UpstreamPathTemplate": "/api/Comments/posts/comments/{postId}",
+        "UpstreamHttpMethod":  [ "GET"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/Comments",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7002
+          }
+        ],
+        "UpstreamPathTemplate": "/api/Comments",
+        "UpstreamHttpMethod":  ["POST"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/Posts",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7004
+          }
+        ],
+        "UpstreamPathTemplate": "/api/Posts",
+        "UpstreamHttpMethod":  [ "GET"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/Posts",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7004
+          }
+        ],
+        "UpstreamPathTemplate": "/api/Posts",
+        "UpstreamHttpMethod":  [ "POST"]
+      },
+      {
+        "DownstreamPathTemplate": "/api/Posts/GetPostAndComments?userId={id}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7004
+          }
+        ],
+        "UpstreamPathTemplate": "/api/Posts/GetPostAndComments?userId={id}",
+        "UpstreamHttpMethod":  [ "GET"]
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "https://localhost:5251"
+    }
+  }
