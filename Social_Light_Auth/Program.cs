@@ -23,8 +23,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 //Cors policy
 builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
 {
-
-
+    build.AllowAnyOrigin();
     build.AllowAnyHeader();
     build.AllowAnyMethod();
 }));

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_POST", "Social
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_light_Frontend", "Social_light_Frontend\Social_light_Frontend.csproj", "{F7AAADA4-D9DD-4DB4-9D66-2FF625E005EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social_Light_Gateway", "Social_Light_Gateway\Social_Light_Gateway.csproj", "{3BA7021D-E3CA-4270-9F65-7567526DE13E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,5 +54,9 @@ Global
 		{F7AAADA4-D9DD-4DB4-9D66-2FF625E005EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7AAADA4-D9DD-4DB4-9D66-2FF625E005EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7AAADA4-D9DD-4DB4-9D66-2FF625E005EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA7021D-E3CA-4270-9F65-7567526DE13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA7021D-E3CA-4270-9F65-7567526DE13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA7021D-E3CA-4270-9F65-7567526DE13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA7021D-E3CA-4270-9F65-7567526DE13E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
