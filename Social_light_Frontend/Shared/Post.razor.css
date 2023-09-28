@@ -7,6 +7,16 @@
 .user-icons{
     display: flex;
 }
+.user-icons svg{
+    padding: 0 .2rem;
+    width: 4%;
+    cursor: pointer;
+
+}
+.user-icons svg:hover
+{
+    color: #007BFF;
+}
 
     /* flex-direction: column; */
 .form-group-two{
@@ -16,7 +26,7 @@
     display: flex;
     width: 100%;
 }
-
+/* user-icons */
 .comment-form .form-group {
     flex: 1;
     margin-right: 10px;

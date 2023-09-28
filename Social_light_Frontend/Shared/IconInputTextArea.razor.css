@@ -1,6 +1,3 @@
-/* IconInputTextArea.razor.css */
-
-/* Container for the icon input */
 .icon-input {
     position: relative;
     display: flex;
@@ -8,39 +5,47 @@
     margin-bottom: 16px;
 }
 
-/* Textarea input field */
 .icon-input textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1.3rem;
     resize: vertical;
-    min-height: 100px; /* Adjust the height as needed */
+    min-height: 100px; 
 }
 
-/* Icon container */
+.form-control{
+    margin: 1rem 0;
+}
+
 .input-icons {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    margin: .6rem;
+    padding-bottom: 1rem;
+}
+/* input-icon */
+.post-btn:hover{
+    color: #39c1f0;
 }
 
-/* Individual icon */
-.input-icon {
+.input-icon svg {
     cursor: pointer;
-    margin-right: 16px;
-    font-size: 24px;
-    color: #333; /* Icon color */
+    margin-right: 2rem;
+    font-size: 2rem;
+    color: #333; 
+}
+.input-icon:hover svg {
+    color: #39c1f0;
+    cursor: pointer;
 }
 
-/* Validation message */
 .validation-message {
-    color: #ff0000; /* Red color for error messages */
-    font-size: 14px;
+    color: #ff0000;
+    font-size: 2rem;
     margin-top: 4px;
 }
 
-/* Styling for the icons (you can customize further) */
 .icon-input .bi {
     vertical-align: text-top;
 }
