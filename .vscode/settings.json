@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/451f897c-baa1-406a-af0a-56062a369131/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/demoapp1200",
+    "appService.deploySubpath": "Social_Light_Auth"
+}

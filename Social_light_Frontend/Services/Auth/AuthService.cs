@@ -8,7 +8,7 @@ namespace Social_light_Frontend.Services.Auth
     public class AuthService : IAuthInterface
     {
         private readonly HttpClient _httpClient;
-        private readonly string BASEURL = "https://localhost:7001";
+        private readonly string BASEURL = "https://sociallightauth20230929142555.azurewebsites.net";
         public AuthService(HttpClient httpClient)
         {
             _httpClient = httpClient;

@@ -1,0 +1,54 @@
+.icon-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    padding: 1rem;
+    border: 2px solid gray;
+    border-radius: 1rem;
+}
+
+.icon-input textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    resize: vertical;
+    min-height: 100px; 
+}
+
+.form-control{
+    margin: 1rem 0;
+}
+
+.input-icons {
+    display: flex;
+    align-items: center;
+    margin: .6rem;
+    padding-bottom: 1rem;
+}
+/* input-icon */
+.post-btn:hover{
+    color: #39c1f0;
+}
+
+.input-icon svg {
+    cursor: pointer;
+    margin-right: 2rem;
+    font-size: 2rem;
+    color: #333; 
+}
+.input-icon:hover svg {
+    color: #39c1f0;
+    cursor: pointer;
+}
+
+.validation-message {
+    color: #ff0000;
+    font-size: 2rem;
+    margin-top: 4px;
+}
+
+.icon-input .bi {
+    vertical-align: text-top;
+}

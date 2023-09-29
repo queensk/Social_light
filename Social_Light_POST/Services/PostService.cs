@@ -61,7 +61,11 @@ namespace Social_Light_POST.Services
         {
             try
             {
-                _context.Posts.Update(post);
+                // get the post with this id
+               var postData = _context.Posts.FirstOrDefault(p => p.Id == post.Id);
+               postData.Title = post.Title;
+               postData.Content = post.Content;
+               postData.PostImage = post.PostImage;
                 await _context.SaveChangesAsync();
                 return "Post Updated";
             }

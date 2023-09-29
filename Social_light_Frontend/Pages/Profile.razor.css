@@ -1,7 +1,7 @@
 /* Profile Container */
 .profile-container {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: auto;
     padding: 20px;
 }
 
@@ -9,75 +9,88 @@
 .profile-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    
+}
+.post-border{
+    width: 100%;
+    border: 1px solid gray;
+    margin: 1rem 0 ;
 }
 
+.post-header{
+    display: flex;
+    margin: 1rem 0 .5rem 0;
+}
 .profile-avatar img {
+    border-radius: 50%;
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    object-fit: cover;
     margin-right: 20px;
 }
 
 .profile-info {
-    flex: 1;
+    flex-grow: 1;
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-
-p {
-    font-size: 16px;
-    color: #657786;
-}
-
-/* Posts */
-.post {
-    border: 1px solid #e1e8ed;
-    border-radius: 8px;
+.follow-button,
+.tweet-button,
+.edit-button,
+.delete-button {
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
     padding: 10px;
-    margin-bottom: 15px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.post-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.profile-name {
-    font-size: 16px;
-    margin: 0;
+/* Profile Content */
+.profile-content {
+    margin-top: 20px;
 }
 
-.post-content p {
-    font-size: 16px;
-    margin-bottom: 10px;
+.post {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.post img.post-image {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 .user-icons {
     display: flex;
-    font-size: 14px;
-    color: #657786;
+    align-items: center;
 }
 
 .user-icons svg {
-    margin-right: 10px;
-    cursor: pointer;
+    margin-right: 5px;
+    fill: #1da1f2;
+}
+.post-header img{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+
+
+}
+.post-header{
+    display: flex;
+    justify-content: space-between;
 }
 
-.user-icons svg:hover {
-    color: #1da1f2;
+.post-usr-profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.post-usr-profile h2{
+    margin: 0 .5rem;
+    text-align: center;
 }

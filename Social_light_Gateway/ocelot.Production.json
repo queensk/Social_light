@@ -5,8 +5,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7002
+            "Host": "sociallightcommentapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Comments/posts/comments/{postId}",
@@ -17,8 +16,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7002
+            "Host": "sociallightcommentapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Comments",
@@ -29,8 +27,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts",
@@ -41,8 +38,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts",
@@ -53,8 +49,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts/GetPostAndComments?userId={id}",
@@ -65,8 +60,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts/GetById?Id={id}",
@@ -77,8 +71,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts",
@@ -89,8 +82,7 @@
         "DownstreamScheme": "https",
         "DownstreamHostAndPorts": [
           {
-            "Host": "localhost",
-            "Port": 7004
+            "Host": "sociallightpostapi.azurewebsites.net"
           }
         ],
         "UpstreamPathTemplate": "/api/Posts?Id={id}",
@@ -98,6 +90,6 @@
       }
     ],
     "GlobalConfiguration": {
-      "BaseUrl": "https://localhost:5251"
+      "BaseUrl": "sociallightgateway20230929160142.azurewebsites.net"
     }
   }

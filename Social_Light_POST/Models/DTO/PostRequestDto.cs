@@ -9,6 +9,7 @@ namespace Social_Light_POST.Models.DTO
 {
     public class PostRequestDto
     {
+        public Guid Id { get; set; }
         [Required]
         public string Title { get; set; } = string.Empty;
         [Required]
