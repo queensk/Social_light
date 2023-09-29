@@ -37,6 +37,12 @@ main {
         text-overflow: ellipsis;
     }
 
+@media (max-width: 768px) {
+    .page{
+        padding: 0 ;
+    }
+}
+
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
         display: none;

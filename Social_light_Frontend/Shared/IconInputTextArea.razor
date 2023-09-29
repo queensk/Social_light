@@ -39,7 +39,7 @@
             @ErrorMessage
         </div>
     }
-    <button class="btn btn-primary" @onclick="CreateUserPost">Post</button>
+    <button class="btn btn-primary post-btn" @onclick="CreateUserPost">Post</button>
 </div>
 
 @code {
@@ -93,7 +93,7 @@
                 {
                     var stream = imageFile.OpenReadStream();
                     var containerName = "posts";
-                    var fileName = $"{Guid.NewGuid()}.jpg";
+                    var fileName =  $"{Guid.NewGuid()}{Path.GetExtension(imageFile.Name)}";
                     var imageUrl = await Storage.UploadFileToStorage(stream, containerName, fileName);
                     userPost.PostImage = imageUrl;
                     var result = await postService.CreatePostAsync(userPost);

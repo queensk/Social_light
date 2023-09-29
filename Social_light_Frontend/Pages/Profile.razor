@@ -2,15 +2,18 @@
 @attribute [Authorize]
 @inject IPostService postService
 @inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
 
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-avatar">
-            <img src="https://example.com/profile-image.jpg" alt="Profile Image" />
+            <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" />
         </div>
         <div class="profile-info">
             <h1>@(loginUserData?.Name ?? "Your Name")</h1>
             <p>@(loginUserData?.Email ?? "This is your bio.")</p>
+            <button class="follow-button">Follow</button>
+            <button class="tweet-button">Post</button>
         </div>
     </div>
 
@@ -21,10 +24,19 @@
                 @foreach (var PostItem in postData)
                 {
                     <div class="post-header">
-                        <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" class="profile-image" />
-                        <span class="profile-name">@PostItem?.User?.Name</span>
+                        <div class="post-usr-profile">
+                            <img src="https://cdn.pixabay.com/photo/2023/09/05/16/40/sunrise-8235464_1280.jpg" alt="Profile Image" />
+                            <h2>user name</h2>
+                        </div>
+
+                        <div>
+                            <button class="edit-button" @onclick="() => EditPost(PostItem.Id)">Edit</button>
+                            <button class="delete-button" @onclick ="() => DeletePost(PostItem.Id)">Delete</button>
+                        </div>
+
                     </div>
                     <div class="post-content">
+                        <h2>@PostItem.Title</h2>
                         @if (!string.IsNullOrEmpty(PostItem?.PostImage))
                         {
                             <img src="@PostItem.PostImage" alt="Post Image" class="post-image" />
@@ -36,6 +48,7 @@
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                     </div>
+                    <div class="post-border"></div>
                 }
             }
             else
@@ -81,5 +94,19 @@
                 postData = await postService.GetPostsByUserIdAsync(userId);
             }
         }
+    }
+
+    private void EditPost(Guid postId)
+    {
+        navigationManager.NavigateTo($"/Post/EditPost/{postId}");
+    }
+
+    private async Task DeletePost(Guid postId)
+    {
+       var response =  await   postService.DeletePostAsync(postId);
+       if (response)
+       {
+            postData = await postService.GetPostsByUserIdAsync(userId);
+       }
     }
 }

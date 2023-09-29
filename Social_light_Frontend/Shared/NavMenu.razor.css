@@ -1,16 +1,19 @@
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
 }
-
+/* navbar-brand */
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    /* background-color: rgba(0,0,0,0.4); */
+    background-color: #39c1f0;
+    font-size: 2rem;
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 1.7rem;
+    text-align: center;
 }
-
+/* nav-item */
 .oi {
     width: 2rem;
     font-size: 1.1rem;
@@ -23,45 +26,50 @@
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
 
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item ::deep a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
+    background-color:  #03769c;
     color: white;
+    border-radius: 2rem;
+    padding: 1rem;
 }
 
 .nav-item ::deep a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
+    border-radius: 2rem;
+    text-align: center;
 }
-
+@media (min-width: 768px)
+{
+    
+}
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;
     }
 
     .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
     
     .nav-scrollable {
-        /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }

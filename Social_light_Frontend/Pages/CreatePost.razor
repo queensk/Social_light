@@ -5,19 +5,11 @@
     <h3>Create a Post</h3>
 
     <div class="post-form">
-        <IconInputTextArea Placeholder="What's on your mind?" @bind-Value="postText" />
-        @* <Image /> *@
+        <IconInputTextArea Placeholder="What's on your mind?"/>
 
     </div>
 </div>
 
 @code {
-    private string postText = "";
 
-    private void CreateUserPost()
-    {
-        // Handle post creation logic here, e.g., save the postText to a database
-        // You can also clear the postText input field after creating the post
-        postText = "";
-    }
 }

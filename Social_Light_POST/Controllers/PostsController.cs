@@ -86,7 +86,7 @@ namespace Social_Light_POST.Controllers
             }
         }
 
-        [HttpGet("GetById({Id})")]
+        [HttpGet("GetById")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetPostById(Guid Id)
         {

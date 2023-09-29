@@ -12,7 +12,7 @@ namespace Social_light_Frontend.Services.Comment
     public class CommentService : ICommentService
     {
         private readonly HttpClient _httpClient;
-        private readonly string BASEURL = "https://localhost:5251"; 
+        private readonly string BASEURL = "https://sociallightgateway20230929160142.azurewebsites.net"; 
         public CommentService(HttpClient httpClient)
         {
 
